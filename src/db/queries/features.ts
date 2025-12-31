@@ -1,10 +1,9 @@
 import type { Feature } from "../../types/Feature.js";
-import { connectToDB } from "../database.js";
+import { db } from "../database.js";
 export const addFeature = (
   activeProjectId: number,
   description: string
 ): Feature => {
-  const db = connectToDB();
   const result = db
     .prepare(
       `
@@ -24,8 +23,6 @@ export const addFeature = (
 };
 
 export const getAllFeature = (): Feature[] => {
-  const db = connectToDB();
-
   const result = db
     .prepare(
       `

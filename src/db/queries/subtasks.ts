@@ -1,7 +1,6 @@
-import { connectToDB } from "../database.js";
+import { db } from "../database.js";
 
 export const addSubtask = (feature_id: number, description: string) => {
-  const db = connectToDB();
   const result = db
     .prepare(
       `
@@ -13,7 +12,6 @@ export const addSubtask = (feature_id: number, description: string) => {
 };
 
 export const createBatchSubTask = (featId: number, subtasks: string[]) => {
-  const db = connectToDB();
   const stmt = db.prepare(`
     INSERT INTO subtasks (feature_id, description) VALUES (?, ?)
     `);
@@ -26,7 +24,6 @@ export const createBatchSubTask = (featId: number, subtasks: string[]) => {
 };
 
 export const getSubtask = (id: number) => {
-  const db = connectToDB();
   const result = db
     .prepare(
       `
