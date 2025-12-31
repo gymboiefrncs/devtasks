@@ -97,3 +97,16 @@ export const getAllFeatures = (): Feature[] => {
     .all();
   return result as Feature[];
 };
+
+// -----------
+// Delete feat
+// -----------
+export const deleteFeature = (id: number) => {
+  const result = db
+    .prepare(
+      `
+    DELETE FROM features WHERE id = ?
+    `
+    )
+    .run(id);
+};

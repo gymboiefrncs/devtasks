@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-
 import { Command } from "commander";
 import { insertFeat } from "./commands/features/addFeat.js";
+import { removeFeature } from "./commands/features/deleteFeat.js";
 import { listAllFeatures } from "./commands/features/listFeat.js";
 import { showFeatureDetails } from "./commands/features/showFeatDetail.js";
 import { initProject } from "./commands/projects/init.js";
@@ -54,9 +54,7 @@ feat
 feat
   .command("remove <id>")
   .description("Remove a feature")
-  .action((id) => {
-    console.log("Delete a feature", id);
-  });
+  .action(removeFeature);
 
 // ------------------
 // Subtasks command
