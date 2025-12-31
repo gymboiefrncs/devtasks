@@ -15,20 +15,17 @@ export type Status = {
 };
 
 export type FeatureWithSubtaskRow = {
-  // Feature Columns (aliased)
   feature_id: number;
   project_id: number;
   feature_description: string;
-  status: Status; // Assuming you have a Status type defined
-  is_focused: number | boolean; // SQLite uses 0/1 for booleans
+  status: Status;
+  is_focused: number | boolean;
   notes: string | null;
-  feature_created_at: string; // SQLite dates are usually stored as strings
+  feature_created_at: string;
   total_time_spent: number;
   time_start: string | null;
-
-  // Subtask Columns (aliased)
-  subtask_id: number | null; // Nullable if using LEFT JOIN
+  subtask_id: number | null;
   subtask_description: string | null;
-  subtask_is_done: number | boolean | null;
+  subtask_is_done: boolean | null;
   subtask_created_at: string | null;
 };
