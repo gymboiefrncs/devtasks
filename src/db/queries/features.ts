@@ -35,16 +35,3 @@ export const getAllFeature = (): Feature[] => {
     .all();
   return result as Feature[];
 };
-
-export const getFeature = (id: number): Feature => {
-  const db = connectToDB();
-
-  const result = db
-    .prepare(
-      `
-    SELECT * FROM features WHERE id = ?
-    `
-    )
-    .get(id);
-  return result as Feature;
-};
