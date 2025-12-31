@@ -1,5 +1,6 @@
-import type { Feature } from "../../types/Feature.js";
+import type { Feature, Status } from "../../types/Feature.js";
 import { db } from "../database.js";
+
 export const addFeature = (
   activeProjectId: number,
   description: string
@@ -22,13 +23,24 @@ export const addFeature = (
   return getResult;
 };
 
-export const getAllFeatureDefault = (): Feature[] => {
+export const getAllFeaturesDefault = (): Feature[] => {
   const result = db
     .prepare(
       `
-    SELECT * FROM features where status = ?
+    SELECT * FROM features WHERE status = ?
     `
     )
     .all("in-progress");
+  return result as Feature[];
+};
+
+export const getAllFeaturesByStatus = (status: Status): Feature[] => {
+  const result = db
+    .prepare(
+      `
+    SELECT * FROM features WHERE status = ?
+    `
+    )
+    .all(status);
   return result as Feature[];
 };

@@ -9,3 +9,7 @@ export type Feature = {
   total_time_spent: number;
   time_start: string;
 };
+
+export type Status = {
+  status: "todo" | "in-progress" | "done";
+};
