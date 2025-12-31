@@ -25,7 +25,7 @@ export const getAllFeature = (): Feature[] => {
   return result as Feature[];
 };
 
-export const getFeature = (id: number) => {
+export const getFeature = (id: number): Feature => {
   const db = connectToDB();
 
   const result = db
@@ -35,5 +35,5 @@ export const getFeature = (id: number) => {
     `
     )
     .get(id);
-  return result;
+  return result as Feature;
 };

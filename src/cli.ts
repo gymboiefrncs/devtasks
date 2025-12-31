@@ -5,6 +5,8 @@ import { insertFeat } from "./commands/features/add.js";
 import { listAllFeatures, listFeat } from "./commands/features/listFeat.js";
 import { initProject } from "./commands/projects/init.js";
 import { listProjects } from "./commands/projects/listProjects.js";
+import { insertSubtask } from "./commands/subtasks/addSubtask.js";
+import { listSubtask } from "./commands/subtasks/getSubtask.js";
 
 const program = new Command();
 
@@ -31,5 +33,15 @@ program
   .action(listAllFeatures);
 
 program.command("getFeat <id>").description("list feature").action(listFeat);
+
+program
+  .command("subtask <featId> <description>")
+  .description("add subtask")
+  .action(insertSubtask);
+
+program
+  .command("listSub <featId>")
+  .description("list all subtasks")
+  .action(listSubtask);
 
 program.parse();
