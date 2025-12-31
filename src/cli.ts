@@ -2,7 +2,7 @@
 
 import { Command } from "commander";
 import { insertFeat } from "./commands/features/add.js";
-import { listAllFeatures } from "./commands/features/listFeat.js";
+import { listAllFeatures, listFeat } from "./commands/features/listFeat.js";
 import { initProject } from "./commands/projects/init.js";
 import { listProjects } from "./commands/projects/listProjects.js";
 
@@ -29,5 +29,7 @@ program
   .command("list feat")
   .description("list all features")
   .action(listAllFeatures);
+
+program.command("getFeat <id>").description("list feature").action(listFeat);
 
 program.parse();
