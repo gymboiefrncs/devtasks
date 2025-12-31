@@ -1,18 +1,24 @@
 #!/usr/bin/env node
 
-import { connectToDB } from "./db/database.js";
+import { Command } from "commander";
+import { initProject } from "./commands/projects/init.js";
+import { listProjects } from "./commands/projects/listProjects.js";
 
-const db = connectToDB();
+const program = new Command();
 
-console.log("Database connected!");
+program
+  .name("devtask")
+  .description("Task management CLI for developers")
+  .version("1.0.0");
 
-const tables = db
-  .prepare(
-    `
-  SELECT name FROM sqlite_master
-  WHERE type='table'
-`
-  )
-  .all();
+program
+  .command("init <projectName>")
+  .description("initialize a project")
+  .action(initProject);
 
-console.log("Tables in DB:", tables);
+program
+  .command("projects")
+  .description("list all projects")
+  .action(listProjects);
+
+program.parse();
