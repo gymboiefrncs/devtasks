@@ -2,11 +2,10 @@
 
 import { Command } from "commander";
 import { insertFeat } from "./commands/features/add.js";
-import { listAllFeatures, listFeat } from "./commands/features/listFeat.js";
+import { listAllFeatures } from "./commands/features/listFeat.js";
 import { initProject } from "./commands/projects/init.js";
 import { listProjects } from "./commands/projects/listProjects.js";
 import { insertSubtask } from "./commands/subtasks/addSubtask.js";
-import { listSubtask } from "./commands/subtasks/getSubtask.js";
 
 const program = new Command();
 
@@ -15,6 +14,9 @@ program
   .description("Task management CLI for developers")
   .version("1.0.0");
 
+// ---------
+// Project Commands
+// ---------
 program
   .command("init <projectName>")
   .description("initialize a project")
@@ -25,23 +27,52 @@ program
   .description("list all projects")
   .action(listProjects);
 
-program.command("feat <description>").option("--subtask").action(insertFeat);
+// -------------------
+//  Feature Commands
+// -------------------
+const feat = program.command("feat").description("Manage feature");
 
-program
-  .command("list feat")
-  .description("list all features")
+feat
+  .command("add <description>")
+  .description("Add new feature")
+  .option("--subtask", "Include subtasks")
+  .action(insertFeat);
+
+feat
+  .command("list")
+  .description("List features")
+  .option("--all", "List all features")
+  .option("--status <status>", "Filter by status")
   .action(listAllFeatures);
 
-program.command("getFeat <id>").description("list feature").action(listFeat);
+feat
+  .command("show <id>")
+  .description("Show feature details")
+  .action((id) => {
+    console.log("Show feature", id);
+  });
 
-program
-  .command("subtask <featId> <description>")
-  .description("add subtask")
+feat
+  .command("remove <id>")
+  .description("Remove a feature")
+  .action((id) => {
+    console.log("Delete a feature", id);
+  });
+
+// ------------------
+// Subtasks command
+// ------------------
+const subtask = program.command("subtask").description("Manage subtasks");
+subtask
+  .command("add <featId> <description>")
+  .description("Add subtask to a feature")
   .action(insertSubtask);
 
-program
-  .command("listSub <featId>")
-  .description("list all subtasks")
-  .action(listSubtask);
+subtask
+  .command("done <featId> <subId>")
+  .description("Mark subtask as done")
+  .action((featId, subId) => {
+    console.log("Mark as done", featId, subId);
+  });
 
 program.parse();
