@@ -44,3 +44,14 @@ export const getAllFeaturesByStatus = (status: Status): Feature[] => {
     .all(status);
   return result as Feature[];
 };
+
+export const getAllFeatures = (): Feature[] => {
+  const result = db
+    .prepare(
+      `
+    SELECT * FROM features
+    `
+    )
+    .all();
+  return result as Feature[];
+};
