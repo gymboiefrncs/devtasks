@@ -14,7 +14,7 @@ export type Status = {
   status: "todo" | "in-progress" | "done";
 };
 
-export interface FeatureWithSubtaskRow {
+export type FeatureWithSubtaskRow = {
   // Feature Columns (aliased)
   feature_id: number;
   project_id: number;
@@ -31,4 +31,4 @@ export interface FeatureWithSubtaskRow {
   subtask_description: string | null;
   subtask_is_done: number | boolean | null;
   subtask_created_at: string | null;
-}
+};
