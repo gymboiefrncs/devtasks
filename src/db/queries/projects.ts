@@ -8,6 +8,14 @@ export const getAllProjects = (): Project[] => {
   return result as Project[];
 };
 
+export const getActiveProjects = (): Project => {
+  const db = connectToDB();
+  const result = db
+    .prepare("SELECT * FROM projects where is_active = 1")
+    .get() as Project;
+  return result;
+};
+
 export const addProject = (name: string): Project => {
   const db = connectToDB();
 
