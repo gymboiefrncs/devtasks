@@ -23,10 +23,7 @@ program
   .description("list all projects")
   .action(listProjects);
 
-program
-  .command("add feat <description>")
-  .option("--subtask")
-  .action(insertFeat);
+program.command("feat <description>").option("--subtask").action(insertFeat);
 
 program
   .command("list feat")
