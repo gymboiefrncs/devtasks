@@ -2,6 +2,7 @@
 
 import { Command } from "commander";
 import { insertFeat } from "./commands/features/add.js";
+import { listAllFeatures } from "./commands/features/listFeat.js";
 import { initProject } from "./commands/projects/init.js";
 import { listProjects } from "./commands/projects/listProjects.js";
 
@@ -26,4 +27,10 @@ program
   .command("add feat <description>")
   .option("--subtask")
   .action(insertFeat);
+
+program
+  .command("list feat")
+  .description("list all features")
+  .action(listAllFeatures);
+
 program.parse();
