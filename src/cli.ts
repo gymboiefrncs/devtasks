@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { insertFeat } from "./commands/features/add.js";
+import { insertFeat } from "./commands/features/addFeat.js";
 import { listAllFeatures } from "./commands/features/listFeat.js";
 import { initProject } from "./commands/projects/init.js";
 import { listProjects } from "./commands/projects/listProjects.js";

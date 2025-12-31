@@ -1,6 +1,9 @@
 import type { Feature } from "../../types/Feature.js";
 import { connectToDB } from "../database.js";
-export const addFeature = (activeProjectId: number, description: string) => {
+export const addFeature = (
+  activeProjectId: number,
+  description: string
+): Feature => {
   const db = connectToDB();
   const result = db
     .prepare(
@@ -9,7 +12,15 @@ export const addFeature = (activeProjectId: number, description: string) => {
     `
     )
     .run(activeProjectId, description);
-  return result;
+
+  const getResult = db
+    .prepare(
+      `
+    SELECT * FROM features WHERE id = ?
+    `
+    )
+    .get(result.lastInsertRowid) as Feature;
+  return getResult;
 };
 
 export const getAllFeature = (): Feature[] => {
