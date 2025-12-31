@@ -1,5 +1,5 @@
-import { getAllFeature } from "../../db/queries/features.js";
+import { getAllFeatureDefault } from "../../db/queries/features.js";
 
 export const listAllFeatures = () => {
-  console.log(getAllFeature());
+  console.log(getAllFeatureDefault());
 };

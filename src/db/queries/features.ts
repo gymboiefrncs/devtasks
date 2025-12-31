@@ -22,13 +22,13 @@ export const addFeature = (
   return getResult;
 };
 
-export const getAllFeature = (): Feature[] => {
+export const getAllFeatureDefault = (): Feature[] => {
   const result = db
     .prepare(
       `
-    SELECT * FROM features
+    SELECT * FROM features where status = ?
     `
     )
-    .all();
+    .all("in-progress");
   return result as Feature[];
 };
