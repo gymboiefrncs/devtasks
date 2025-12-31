@@ -3,6 +3,7 @@
 import { Command } from "commander";
 import { insertFeat } from "./commands/features/addFeat.js";
 import { listAllFeatures } from "./commands/features/listFeat.js";
+import { showFeatureDetails } from "./commands/features/showFeatDetail.js";
 import { initProject } from "./commands/projects/init.js";
 import { listProjects } from "./commands/projects/listProjects.js";
 import { insertSubtask } from "./commands/subtasks/addSubtask.js";
@@ -48,9 +49,7 @@ feat
 feat
   .command("show <id>")
   .description("Show feature details")
-  .action((id) => {
-    console.log("Show feature", id);
-  });
+  .action(showFeatureDetails);
 
 feat
   .command("remove <id>")

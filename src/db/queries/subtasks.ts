@@ -22,14 +22,3 @@ export const createBatchSubTask = (featId: number, subtasks: string[]) => {
   });
   batchInsert(subtasks);
 };
-
-export const getSubtask = (id: number) => {
-  const result = db
-    .prepare(
-      `
-      SELECT * FROM subtasks where feature_id = ?
-    `
-    )
-    .all(id);
-  return result;
-};
