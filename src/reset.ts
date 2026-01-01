@@ -5,7 +5,7 @@ export function resetFeaturesAndSubtasks(): Record<string, any[]> {
   const dbFile: string = getDbPath();
   const db = new Database(dbFile);
 
-  const tablesToReset = ["features", "subtasks"];
+  const tablesToReset = ["projects", "features", "subtasks"];
   const remainingData: Record<string, any[]> = {};
 
   db.transaction(() => {
@@ -21,7 +21,7 @@ export function resetFeaturesAndSubtasks(): Record<string, any[]> {
   for (const table of tablesToReset) {
     remainingData[table] = db.prepare(`SELECT * FROM ${table};`).all();
   }
-
+  console.log("reset done");
   return remainingData;
 }
 resetFeaturesAndSubtasks();

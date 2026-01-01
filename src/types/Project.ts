@@ -5,3 +5,11 @@ export type Project = {
   last_active: string;
   is_active: boolean;
 };
+
+export type FormattedProjects = {
+  id: number;
+  name: string;
+  created_at: string;
+  last_active: string;
+  is_active: string;
+};
