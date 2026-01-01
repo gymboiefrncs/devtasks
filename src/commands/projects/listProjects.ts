@@ -1,9 +1,22 @@
+import chalk from "chalk";
 import { Table } from "console-table-printer";
 import { getAllProjects } from "../../db/queries/projects.js";
 import type { FormattedProjects, Project } from "../../types/Project.js";
 
 export const listProjects = (): void => {
   const projects: Project[] = getAllProjects();
+
+  if (!projects.length) {
+    console.log(`\n${chalk.bold("No projects found")}`);
+    console.log(
+      chalk.dim(
+        `  -> Try creating one with ${chalk.cyan.italic.bold(
+          "devtask init <ProjectName>"
+        )}\n`
+      )
+    );
+    return;
+  }
 
   const formatDate: Intl.DateTimeFormat = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
