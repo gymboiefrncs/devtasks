@@ -4,7 +4,7 @@ import { insertFeat } from "./commands/features/addFeat.js";
 import { removeFeature } from "./commands/features/deleteFeat.js";
 import { listAllFeatures } from "./commands/features/listFeat.js";
 import { showFeatureDetails } from "./commands/features/showFeatDetail.js";
-import { initProject } from "./commands/projects/init.js";
+import { initProject } from "./commands/projects/initProject.js";
 import { listProjects } from "./commands/projects/listProjects.js";
 import { insertSubtask } from "./commands/subtasks/addSubtask.js";
 
