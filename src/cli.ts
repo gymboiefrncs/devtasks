@@ -8,6 +8,7 @@ import { initProject } from "./commands/projects/initProject.js";
 import { listProjects } from "./commands/projects/listProjects.js";
 import { switchProjects } from "./commands/projects/switchProject.js";
 import { insertSubtask } from "./commands/subtasks/addSubtask.js";
+import { db } from "./db/database.js";
 
 const program = new Command();
 
@@ -79,3 +80,7 @@ subtask
   });
 
 program.parse();
+
+process.on("exit", () => {
+  db.close();
+});
