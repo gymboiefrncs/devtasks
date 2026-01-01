@@ -8,10 +8,10 @@ export const getAllProjects = (): Project[] => {
   return db.prepare(`SELECT * FROM projects`).all() as Project[];
 };
 
-export const getActiveProject = (): Project => {
-  return db
-    .prepare("SELECT * FROM projects where is_active = 1")
-    .get() as Project;
+export const getActiveProject = (): Project | undefined => {
+  return db.prepare("SELECT * FROM projects where is_active = 1").get() as
+    | Project
+    | undefined;
 };
 
 // ----------------------
