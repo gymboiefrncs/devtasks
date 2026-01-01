@@ -6,6 +6,7 @@ import { listAllFeatures } from "./commands/features/listFeat.js";
 import { showFeatureDetails } from "./commands/features/showFeatDetail.js";
 import { initProject } from "./commands/projects/initProject.js";
 import { listProjects } from "./commands/projects/listProjects.js";
+import { switchProjects } from "./commands/projects/switchProject.js";
 import { insertSubtask } from "./commands/subtasks/addSubtask.js";
 
 const program = new Command();
@@ -27,6 +28,11 @@ program
   .command("projects")
   .description("list all projects")
   .action(listProjects);
+
+program
+  .command("switch <projectId>")
+  .description("Switch between projects")
+  .action(switchProjects);
 
 // -------------------
 //  Feature Commands
