@@ -19,16 +19,15 @@ export const getActiveProject = (): Project | undefined => {
 // ----------------------
 export const addProject = (name: string): Project => {
   const createActiveProject = db.transaction((projectName: string) => {
-    // to ensure that theres only one active project
-    db.prepare(`UPDATE projects SET is_active = 0 WHERE is_active = 1`).run();
-
+    const activeProject = getActiveProject();
+    const isActive = activeProject ? 0 : 1;
     const newProject = db
       .prepare(
         `INSERT INTO projects (name, is_active)
-         VALUES (?, 1)
+         VALUES (?, ?)
          RETURNING * `
       )
-      .get(projectName) as Project | undefined;
+      .get(projectName, isActive) as Project | undefined;
 
     if (!newProject)
       throw new Error(
