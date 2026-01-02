@@ -1,9 +1,8 @@
 import chalk from "chalk";
 import { addProject } from "../../db/queries/projects.js";
 
-export const initProject = (name: string): void => {
-  const project = addProject(name);
-
+export const initProject = (name: string, options?: { s?: string }): void => {
+  const project = addProject(name, options);
   console.log(
     `\n✅ ${chalk.bold("Project created:")} '${chalk.cyan(project.name)}'`
   );

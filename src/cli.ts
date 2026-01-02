@@ -22,6 +22,7 @@ program
 // ---------
 program
   .command("init <projectName>")
+  .option("-s", "switch to newly created project")
   .description("initialize a project")
   .action(initProject);
 

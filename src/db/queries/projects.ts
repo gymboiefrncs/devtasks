@@ -17,7 +17,7 @@ export const getActiveProject = (): Project | undefined => {
 // ----------------------
 // Insert project query
 // ----------------------
-export const addProject = (name: string): Project => {
+export const addProject = (name: string, options?: { s?: string }): Project => {
   const createActiveProject = db.transaction((projectName: string) => {
     const activeProject = getActiveProject();
     const isActive = activeProject ? 0 : 1;
@@ -33,6 +33,7 @@ export const addProject = (name: string): Project => {
       throw new Error(
         "DATABASE_ERROR: The insert statement failed to return data"
       );
+    if (options?.s) setActiveProject(newProject.id);
 
     return newProject;
   });
