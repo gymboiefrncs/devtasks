@@ -4,6 +4,7 @@ import { insertFeat } from "./commands/features/addFeat.js";
 import { removeFeature } from "./commands/features/deleteFeat.js";
 import { listAllFeatures } from "./commands/features/listFeat.js";
 import { showFeatureDetails } from "./commands/features/showFeatDetail.js";
+import { displayCurrentProject } from "./commands/projects/displayProject.js";
 import { initProject } from "./commands/projects/initProject.js";
 import { listProjects } from "./commands/projects/listProjects.js";
 import { switchProjects } from "./commands/projects/switchProject.js";
@@ -35,6 +36,11 @@ program
   .command("switch <projectId>")
   .description("Switch between projects")
   .action(switchProjects);
+
+program
+  .command("current")
+  .description("Display current active projevct with details")
+  .action(displayCurrentProject);
 
 // -------------------
 //  Feature Commands

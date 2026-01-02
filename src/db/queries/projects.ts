@@ -9,9 +9,13 @@ export const getAllProjects = (): Project[] => {
 };
 
 export const getActiveProject = (): Project | undefined => {
-  return db.prepare("SELECT * FROM projects where is_active = 1").get() as
-    | Project
-    | undefined;
+  const activeProject = db
+    .prepare("SELECT * FROM projects where is_active = 1")
+    .get() as Project | undefined;
+
+  if (!activeProject)
+    throw new Error("DATABASE_ERROR: failed to get active prroject");
+  return activeProject;
 };
 
 // ----------------------
