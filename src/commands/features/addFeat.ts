@@ -7,7 +7,21 @@ export const insertFeat = (
   description: string,
   options: { subtask?: boolean }
 ) => {
-  const { id: activeProjectId } = getActiveProject();
+  const activeProject = getActiveProject();
+  if (!activeProject) {
+    console.log(chalk.yellow("       ⚠  No active project"));
+    console.log(
+      chalk.bold(
+        `       Try adding a project: ${chalk.italic.dim(
+          "devtask init <project name>"
+        )}`
+      )
+    );
+    return;
+  }
+
+  const { id: activeProjectId } = activeProject;
+
   const { id: featId } = addFeature(activeProjectId, description);
   console.log(chalk.green.bold("Feature added!"));
 
