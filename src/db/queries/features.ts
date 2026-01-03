@@ -58,14 +58,14 @@ export const getFeatureDetails = (id: number): FeatureWithSubtaskRow[] => {
 // -----------
 // Get feature
 // -----------
-export const getAllFeaturesDefault = (): Feature[] => {
+export const getAllFeaturesDefault = (id: number): Feature[] => {
   const result = db
     .prepare(
       `
-    SELECT * FROM features WHERE status = ?
+    SELECT * FROM features WHERE status = ? and project_id = ?
     `
     )
-    .all("in-progress");
+    .all("in-progress", id);
   return result as Feature[];
 };
 
