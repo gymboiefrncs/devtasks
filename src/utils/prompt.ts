@@ -16,6 +16,6 @@ export const promptSubtask = async (featId: number) => {
     if (!task.trim()) break;
     subtasks.push(task.trim());
   }
-
+  if (!subtasks.length) return false;
   insertBatchSubtask(featId, subtasks);
 };

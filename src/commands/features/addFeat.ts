@@ -3,7 +3,7 @@ import { addFeature } from "../../db/queries/features.js";
 import { getActiveProject } from "../../db/queries/projects.js";
 import { promptSubtask } from "../../utils/prompt.js";
 
-export const insertFeat = (
+export const insertFeat = async (
   description: string,
   options: { subtask?: boolean }
 ) => {
@@ -30,11 +30,20 @@ export const insertFeat = (
   const { id: featId, description: desc } = newFeature;
 
   if (options.subtask) {
-    promptSubtask(featId);
+    try {
+      const success = await promptSubtask(featId);
+      if (!success) {
+        console.log(chalk.dim.italic("\n -- No subtask added\n"));
+      } else {
+        console.log(
+          chalk.green.bold(`\n✔  Subtask added to feature [${featId}] ${desc}`)
+        );
+      }
+    } catch (error) {
+      console.error(chalk.red("✖  Something went wrong", error));
+    }
   }
-
   console.log(chalk.green.bold("✔  Feature added successfully \n"));
   console.log(chalk.cyan(`   [ID: ${featId}]  ${desc}`));
-
   console.log(chalk.gray("──────────────────────────────\n"));
 };

@@ -51,7 +51,9 @@ feat
   .command("add <description>")
   .description("Add new feature")
   .option("--subtask", "Include subtasks")
-  .action(insertFeat);
+  .action(async (description: string, options: { subtask?: boolean }) => {
+    await insertFeat(description, options);
+  });
 
 feat
   .command("list")
@@ -86,7 +88,7 @@ subtask
     console.log("Mark as done", featId, subId);
   });
 
-program.parse();
+program.parseAsync();
 
 process.on("exit", () => {
   db.close();
