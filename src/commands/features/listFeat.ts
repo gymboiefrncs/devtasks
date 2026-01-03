@@ -4,11 +4,25 @@ import {
   getAllFeaturesByStatus,
   getAllFeaturesDefault,
 } from "../../db/queries/features.js";
+import { getActiveProject } from "../../db/queries/projects.js";
 import type { Status } from "../../types/Feature.js";
 
 export const listAllFeatures = (options: { all: string; status: Status }) => {
+  const activeProject = getActiveProject();
+  if (!activeProject) {
+    console.log(chalk.yellow("       ⚠  No active project"));
+    console.log(
+      chalk.bold(
+        `       Try adding a project: ${chalk.italic.dim(
+          "devtask init <project name>"
+        )}`
+      )
+    );
+    return;
+  }
+  const { id } = activeProject;
   if (options.all) {
-    const features = getAllFeatures();
+    const features = getAllFeatures(id);
     if (!features.length) {
       console.log(chalk.yellow("     ⚠ No features found for this project"));
       console.log(

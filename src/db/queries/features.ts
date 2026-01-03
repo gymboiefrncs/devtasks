@@ -80,14 +80,14 @@ export const getAllFeaturesByStatus = (status: Status): Feature[] => {
   return result as Feature[];
 };
 
-export const getAllFeatures = (): Feature[] => {
+export const getAllFeatures = (id: number): Feature[] => {
   const result = db
     .prepare(
       `
-    SELECT * FROM features
+    SELECT * FROM features WHERE project_id = ?
     `
     )
-    .all();
+    .all(id);
   return result as Feature[];
 };
 
