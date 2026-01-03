@@ -69,14 +69,17 @@ export const getAllFeaturesDefault = (): Feature[] => {
   return result as Feature[];
 };
 
-export const getAllFeaturesByStatus = (status: Status): Feature[] => {
+export const getAllFeaturesByStatus = (
+  status: Status,
+  id: number
+): Feature[] => {
   const result = db
     .prepare(
       `
-    SELECT * FROM features WHERE status = ?
+    SELECT * FROM features WHERE status = ? AND project_id = ?
     `
     )
-    .all(status);
+    .all(status, id);
   return result as Feature[];
 };
 

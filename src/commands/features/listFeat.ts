@@ -21,6 +21,7 @@ export const listAllFeatures = (options: { all: string; status: Status }) => {
     return;
   }
   const { id } = activeProject;
+
   if (options.all) {
     const features = getAllFeatures(id);
     if (!features.length) {
@@ -65,7 +66,45 @@ export const listAllFeatures = (options: { all: string; status: Status }) => {
       console.log(chalk.gray("──────────────────────────────\n"));
     }
   } else if (options.status) {
-    console.log(getAllFeaturesByStatus(options.status));
+    const features = getAllFeaturesByStatus(options.status, id);
+    if (!features.length) {
+      console.log(
+        chalk.yellow(
+          `     ⚠ No '${options.status}' features found for this project`
+        )
+      );
+      return;
+    }
+
+    console.log(chalk.bold.underline.blue("\n=== Features List ===\n"));
+
+    for (const feature of features) {
+      console.log(
+        chalk.bold.cyan(`#${feature.id}`) +
+          " " +
+          chalk.bold.white(feature.description)
+      );
+
+      console.log(
+        `  ${chalk.bgYellow.black(" STATUS ")}: ${chalk.yellowBright(
+          feature.status
+        )}  |` +
+          ` ${chalk.bgGreen.black(" FOCUSED ")}: ${
+            feature.is_focused ? chalk.greenBright("✔") : chalk.redBright("✖")
+          }`
+      );
+
+      console.log(
+        `  ${chalk.bgMagenta.black(" STARTED ")}: ${chalk.magentaBright(
+          feature.time_start ?? "N/A"
+        )}  |` +
+          ` ${chalk.bgBlue.black(" TIME SPENT ")}: ${chalk.blueBright(
+            feature.total_time_spent ?? "0h"
+          )}`
+      );
+
+      console.log(chalk.gray("──────────────────────────────\n"));
+    }
   } else {
     console.log(getAllFeaturesDefault());
   }
