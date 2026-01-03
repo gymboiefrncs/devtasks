@@ -105,4 +105,5 @@ export const deleteFeature = (id: number) => {
     `
     )
     .run(id);
+  return result.changes;
 };
