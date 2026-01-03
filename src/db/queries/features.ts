@@ -11,23 +11,16 @@ import { db } from "../database.js";
 export const addFeature = (
   activeProjectId: number,
   description: string
-): Feature => {
+): Feature | undefined => {
   const result = db
     .prepare(
       `
-    INSERT INTO features (project_id, description) VALUES (?, ?)
+    INSERT INTO features (project_id, description) VALUES (?, ?) RETURNING *
     `
     )
-    .run(activeProjectId, description);
-
-  const getResult = db
-    .prepare(
-      `
-    SELECT * FROM features WHERE id = ?
-    `
-    )
-    .get(result.lastInsertRowid) as Feature;
-  return getResult;
+    .get(activeProjectId, description) as Feature | undefined;
+  if (!result) throw new Error("DATAEBSAE_ERROR: failed to add feature");
+  return result;
 };
 
 // -----------
