@@ -107,3 +107,17 @@ export const deleteFeature = (id: number) => {
     .run(id);
   return result.changes;
 };
+
+// ---------------
+// Focus commands
+// ---------------
+export const focusFeature = (featId: number): Feature | undefined => {
+  const result = db
+    .prepare(
+      "UPDATE features SET is_focused = ?, status = 'in-progress' WHERE id = ? RETURNING *"
+    )
+    .get(1, featId);
+  if (!result) throw new Error("DATAEBSAE_ERROR: failed to add feature");
+
+  return result as Feature | undefined;
+};
