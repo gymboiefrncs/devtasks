@@ -26,7 +26,6 @@ export const addFeature = (
 // -----------
 // Show feature details
 // -----------
-
 export const getFeatureDetails = (id: number): FeatureWithSubtaskRow[] => {
   const result = db
     .prepare(
