@@ -131,3 +131,11 @@ export const setUnfocusFeature = (featId: number): Feature | undefined => {
 
   return result as Feature | undefined;
 };
+
+export const setUnfocusAllFeature = () => {
+  const result = db.transaction(() => {
+    db.prepare("UPDATE features SET is_focused = 0, status = 'todo'").run();
+  });
+
+  result();
+};
