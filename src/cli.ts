@@ -5,6 +5,7 @@ import { removeFeature } from "./commands/features/deleteFeat.js";
 import { focusOnAFeature } from "./commands/features/focusFeat.js";
 import { listAllFeatures } from "./commands/features/listFeat.js";
 import { showFeatureDetails } from "./commands/features/showFeatDetail.js";
+import { unfocusFeature } from "./commands/features/unfocusFeat.js";
 import { displayCurrentProject } from "./commands/projects/displayProject.js";
 import { initProject } from "./commands/projects/initProject.js";
 import { listProjects } from "./commands/projects/listProjects.js";
@@ -77,6 +78,12 @@ feat
   .command("focus <featId>")
   .description("Focus on a feature")
   .action(focusOnAFeature);
+
+feat
+  .command("unfocus <featId>")
+  .description("Unfocus a feature")
+  .action(unfocusFeature);
+
 // ------------------
 // Subtasks command
 // ------------------

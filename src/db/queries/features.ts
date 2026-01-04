@@ -120,3 +120,14 @@ export const focusFeature = (featId: number): Feature | undefined => {
 
   return result as Feature | undefined;
 };
+
+export const setUnfocusFeature = (featId: number): Feature | undefined => {
+  const result = db
+    .prepare(
+      "UPDATE features SET is_focused = ?, status = 'todo' WHERE id = ? RETURNING *"
+    )
+    .get(0, featId);
+  if (!result) throw new Error("DATAEBSAE_ERROR: failed to add feature");
+
+  return result as Feature | undefined;
+};
